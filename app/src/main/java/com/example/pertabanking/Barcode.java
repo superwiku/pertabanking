@@ -1,19 +1,12 @@
 package com.example.pertabanking;
 
 public class Barcode {
-    private String timeStamp;
+
     private String noreg;
     private String bbm;
     private String liter;
     private String status;
 
-    public String getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
-    }
 
     public String getNoreg() {
         return noreg;
