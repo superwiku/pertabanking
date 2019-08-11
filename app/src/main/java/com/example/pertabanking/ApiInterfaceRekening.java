@@ -16,13 +16,12 @@ public interface ApiInterfaceRekening {
             @Field("action") String action,
             @Field("nama") String nama,
             @Field("noreg") String noreg,
-            @Field("uang") String uang,
-            @Field("tableName") String tableName
+            @Field("uang") String uang
+
     );
 
-
     @GET("exec")
-    Call<Rekening> getRekening(@Query("noreg") String noreg);
+    Call <List<Rekening>> getRekening(@Query("noreg") int noreg);
 
     @FormUrlEncoded
     @POST("exec")
@@ -30,8 +29,8 @@ public interface ApiInterfaceRekening {
             @Field("action") String action,
             @Field("noreg") String noreg,
             @Field("bbm") String bbm,
-            @Field("liter") int liter,
-            @Field("tableName") String tableName
-    );
+            @Field("liter") int liter
+           );
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.pertabanking;
 
 public class Rekening {
+    private String Timestamp;
     private String nama;
     private String noreg;
     private String uang;
@@ -27,5 +28,13 @@ public class Rekening {
 
     public void setUang(String uang) {
         this.uang = uang;
+    }
+
+    public String getTimestamp() {
+        return Timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        Timestamp = timestamp;
     }
 }

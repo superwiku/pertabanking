@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -14,41 +16,49 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 EditText edtNoreg;
 Button btnReg;
-Rekening rekening;
+List<Rekening> rekening;
 String namanya;
 String noreg;
+int noregint;
 ApiInterfaceRekening apiInterfaceRekening;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        edtNoreg=(EditText)findViewById(R.id.edt_noreg);
+        edtNoreg=(EditText)findViewById(R.id.edt_noregnya);
         btnReg=(Button)findViewById(R.id.btn_reg);
+        getClick();
+    }
+
+    public void getClick(){
+
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                noreg=edtNoreg.getText().toString();
+                noregint=Integer.parseInt(noreg);
                 apiInterfaceRekening=ApiClientRekening.getApiClient().create(ApiInterfaceRekening.class);
-                Call<Rekening> rekeningCall=apiInterfaceRekening.getRekening(edtNoreg.getText().toString());
-                rekeningCall.enqueue(new Callback<Rekening>() {
+                Call <List<Rekening>> rekeningCall=apiInterfaceRekening.getRekening(noregint);
+                rekeningCall.enqueue(new Callback<List<Rekening>>() {
                     @Override
-                    public void onResponse(Call<Rekening> call, Response<Rekening> response) {
+                    public void onResponse(Call<List<Rekening>> call, Response<List<Rekening>> response) {
                         rekening=response.body();
-                        String namanya="wiku hermawan";
-                        Intent pindah=new Intent(MainActivity.this,BeliActivity.class);
-                        pindah.putExtra("namabos",namanya);
-                        startActivity(pindah);
+                        pindah();
 
                     }
 
                     @Override
-                    public void onFailure(Call<Rekening> call, Throwable t) {
-                        Intent pindah=new Intent(MainActivity.this,BeliActivity.class);
-                        String namanya="wiku hermawan";
-                        pindah.putExtra("namabos",namanya);
-                        startActivity(pindah);
+                    public void onFailure(Call<List<Rekening>> call, Throwable t) {
+                        t.printStackTrace();
                     }
                 });
             }
         });
+    }
+    public  void pindah(){
+        namanya=rekening.get(0).getNama();
+        Intent pindah=new Intent(MainActivity.this,BeliActivity.class);
+        pindah.putExtra("namabos",namanya);
+        startActivity(pindah);
     }
 }

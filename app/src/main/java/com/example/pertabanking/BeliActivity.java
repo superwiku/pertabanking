@@ -56,10 +56,11 @@ String kodebeli;
                 txtLiternya.setText(literan);
             }
         });
+
         btnTransaksi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                kodebeli=txtNama.toString()+" "+txtBbmnya.toString()+" "+txtLiternya.toString()+" liter";
+                kodebeli=txtNama.getText().toString()+" "+txtBbmnya.getText().toString()+" "+txtLiternya.getText().toString()+" liter";
                 Intent bikinkode=new Intent(BeliActivity.this,CodeActivity.class);
                 bikinkode.putExtra("kodenya",kodebeli);
                 startActivity(bikinkode);

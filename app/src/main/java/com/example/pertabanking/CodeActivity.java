@@ -29,12 +29,12 @@ public class CodeActivity extends AppCompatActivity {
         imgCode=(ImageView)findViewById(R.id.img_code);
         Intent a=getIntent();
         txtKodeBeli.setText(a.getStringExtra("kodenya"));
-        kodescan=txtKodeBeli.toString();
         tampilkanKode=(Button)findViewById(R.id.btn_tampil);
         tampilkanKode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
+                    kodescan=txtKodeBeli.getText().toString();
                     BitMatrix bitMatrix=multi.encode(kodescan, BarcodeFormat.QR_CODE,200,200);
                     BarcodeEncoder encoder=new BarcodeEncoder();
                     Bitmap bitmap=encoder.createBitmap(bitMatrix);
